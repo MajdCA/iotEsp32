@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket Test</title>
+</head>
+
+<body>
+    <div id="messages"></div>
+
+    <script>
+        const ws = new WebSocket('ws://192.168.0.6:8080');
+
+        ws.onopen = function () {
+            console.log('Connected to the WebSocket server');
+        };
+
+        ws.onmessage = function (event) {
+            const messages = document.getElementById('messages');
+            messages.innerHTML += '<br>' + event.data;
+        };
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            ws.send(message);
+        }
+    </script>
+
+    <input type="text" id="message" />
+    <button onclick="sendMessage()">Send</button>
+
+</body>
+
+</html>
